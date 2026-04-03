@@ -7,6 +7,8 @@
     <link rel="shortcut icon" href="#"> 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+        /* 영수증 전용 폰트 (타자기 느낌) */
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
         body {
             margin: 0;
@@ -29,7 +31,6 @@
             transition: transform 0.5s ease-in-out;
         }
 
-        /* 화면 찌그러짐 완벽 방지 */
         .screen {
             flex: 0 0 100vw; 
             height: 100vh;
@@ -49,7 +50,6 @@
             word-break: keep-all;
         }
 
-        /* 첫 화면 로고 스타일 */
         .logo-container {
             display: flex;
             flex-direction: column;
@@ -61,7 +61,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        /* 시작 버튼 전용 스타일 */
         .start-btn {
             margin-top: 50px;
             font-size: 22px;
@@ -74,7 +73,7 @@
             cursor: pointer;
             box-shadow: 0 8px 15px rgba(255, 204, 0, 0.4);
             transition: all 0.2s;
-            animation: bounce 2s infinite; /* 시선을 끄는 애니메이션 */
+            animation: bounce 2s infinite; 
         }
         .start-btn:hover, .start-btn:active {
             transform: scale(0.95);
@@ -87,7 +86,6 @@
             60% { transform: translateY(-5px); }
         }
 
-        /* 버튼 컨테이너 및 스타일 */
         .btn-grid {
             display: flex;
             flex-wrap: wrap;
@@ -114,7 +112,6 @@
             color: #fff;
         }
 
-        /* 입력 폼 스타일 */
         input[type="number"], input[type="text"] {
             padding: 15px;
             font-size: 18px;
@@ -143,55 +140,6 @@
             margin-top: 10px;
         }
 
-        /* 결과 화면 스타일 */
-        #result-container {
-            width: 100%;
-            max-width: 600px;
-            max-height: 60vh;
-            overflow-y: auto;
-            background: #fff;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .menu-item {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        .menu-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .menu-name {
-            font-size: 22px;
-            font-weight: bold; /* 메뉴에만 굵은 글씨체 */
-            color: #D32F2F;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .medal-emoji {
-            font-size: 26px;
-        }
-        .menu-reason {
-            font-size: 16px;
-            color: #555;
-            line-height: 1.5;
-        }
-        .ending-text {
-            font-size: 22px;
-            font-weight: bold;
-            color: #618A3D;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* 메시지 화면 (식재료 확인) */
         #ingredient-msg {
             font-size: 24px;
             font-weight: bold;
@@ -201,6 +149,109 @@
             align-items: center;
             line-height: 1.5;
         }
+
+        /* --- 힙한 영수증 UI 스타일 --- */
+        #result-container {
+            width: 100%;
+            max-width: 400px;
+            max-height: 65vh;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            /* 스크롤바 숨기기 (영수증 감성 유지) */
+            scrollbar-width: none; 
+        }
+        #result-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .receipt-paper {
+            background-color: #fdfdfd;
+            padding: 30px 20px;
+            margin: 10px auto;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            font-family: 'Courier Prime', monospace; /* 타자기 폰트 적용 */
+            text-align: left;
+            color: #222;
+            border: 1px solid #eaeaea;
+            border-top: 4px solid #D32F2F; /* 영수증 상단 포인트 컬러 */
+        }
+        /* 영수증 하단 지그재그 모양 효과 */
+        .receipt-paper::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(135deg, transparent 50%, #fdfdfd 50%), linear-gradient(-135deg, transparent 50%, #fdfdfd 50%);
+            background-size: 15px 15px;
+        }
+
+        .receipt-header {
+            text-align: center;
+            border-bottom: 2px dashed #ccc;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .receipt-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            letter-spacing: -1px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .receipt-info {
+            font-size: 13px;
+            color: #666;
+            margin: 3px 0;
+        }
+
+        .receipt-item {
+            margin-bottom: 20px;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        .item-medal {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+        .item-reason {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            font-family: 'Noto Sans KR', sans-serif; /* 이유는 읽기 편하게 원래 폰트로 */
+            padding-left: 5px;
+            border-left: 2px solid #eee;
+        }
+
+        .receipt-footer {
+            border-top: 2px dashed #ccc;
+            padding-top: 20px;
+            text-align: center;
+        }
+        .total-msg {
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'Noto Sans KR', sans-serif;
+            color: #D32F2F;
+            margin-bottom: 15px;
+        }
+        .barcode {
+            font-size: 35px;
+            font-weight: normal;
+            letter-spacing: 2px;
+            color: #111;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
     </style>
 </head>
 <body>
@@ -304,15 +355,13 @@
                 <h2>오늘 이 음식 어떠세요?</h2>
                 <div id="result-container">
                     </div>
-                <div class="ending-text">오늘도 맛있는 한끼하세요!</div>
-                <button class="action-btn" onclick="resetApp()">밥 먹으러 가기!</button>
+                <button class="action-btn" style="margin-top: 20px;" onclick="resetApp()">다시 추천받기 🔄</button>
             </div>
 
         </div>
     </div>
 
     <script>
-        // 백엔드(Vercel 서버리스)를 사용하므로 클라이언트 코드에 API 키를 노출하지 않습니다.
         const state = {};
         let currentIndex = 0;
         const slider = document.getElementById('slider');
@@ -356,17 +405,15 @@
 
             nextScreen(); 
             
-            // 효과음 재생
             bgm.volume = 0.5;
             bgm.load(); 
             const playPromise = bgm.play();
             if (playPromise !== undefined) {
                 playPromise.catch(error => {
-                    console.error("오디오 자동 재생이 막혔습니다. 브라우저 설정에서 사이트 소리를 '허용'해주세요.", error);
+                    console.error("오디오 자동 재생 제한", error);
                 });
             }
 
-            // 직접 통신이 아닌 자체 배포된 백엔드 서버 호출
             fetchRecommendations();
         }
 
@@ -380,7 +427,7 @@
 2. 장르(${state.cuisine})에 완벽하게 들어맞는 창의적이고 트렌디한 메뉴 3가지를 추천하세요.
 3. 추천 메뉴 3개 각각에 대해 메달 이모지(🥇, 🥈, 🥉)를 순서대로 부여하세요.
 4. 각 음식 이름 옆에 그 음식과 관련된 이모지를 추가하세요.
-5. 출력 형식은 반드시 아래의 JSON 배열 포맷만 출력하세요. (마크다운 코드블록이나 다른 설명 금지)
+5. 출력 형식은 반드시 아래의 JSON 배열 포맷만 출력하세요. (마크다운 설명 금지)
 
 JSON 포맷:
 [
@@ -390,7 +437,6 @@ JSON 포맷:
 ]`;
 
             try {
-                // Vercel 서버리스 환경에 맞춘 상대 경로 호출 ('/api/recommend')
                 const response = await fetch('/api/recommend', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -405,14 +451,13 @@ JSON 포맷:
                 renderResults(menuData);
 
             } catch (error) {
-                console.error("발생한 에러 상세정보:", error);
+                console.error("Error:", error);
                 
                 const container = document.getElementById('result-container');
                 container.innerHTML = `
                     <div style="color: #D32F2F; font-weight: bold; background: #ffebee; padding: 20px; border-radius: 10px; text-align: center;">
                         <h3 style="margin-top:0;">🚨 통신 에러 발생!</h3>
                         <p style="word-break: keep-all; line-height: 1.5;">서버와의 연결이 끊어졌거나 통신 중 오류가 발생했습니다.</p>
-                        <p style="font-size: 14px; color: #555; margin-top: 15px;">(배포된 Vercel 환경 변수가 올바른지 확인해 주세요.)</p>
                     </div>
                 `;
                 
@@ -424,22 +469,51 @@ JSON 포맷:
             }
         }
 
+        // --- 영수증 UI 렌더링 함수 ---
         function renderResults(menuData) {
             const container = document.getElementById('result-container');
-            container.innerHTML = '';
+            
+            // 현재 날짜 및 시간 구하기 포맷팅
+            const now = new Date();
+            const dateStr = now.getFullYear() + '.' + String(now.getMonth() + 1).padStart(2, '0') + '.' + String(now.getDate()).padStart(2, '0');
+            const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+            
+            // 주문번호 랜덤 생성
+            const orderNum = Math.floor(Math.random() * 900) + 100;
 
-            menuData.forEach((menu) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'menu-item';
-                itemDiv.innerHTML = `
-                    <div class="menu-name">
-                        <span class="medal-emoji">${menu.medal}</span>
-                        <span>${menu.name}</span>
+            let html = `
+                <div class="receipt-paper">
+                    <div class="receipt-header">
+                        <div class="receipt-title">🧾 뭐 먹지 영수증</div>
+                        <div class="receipt-info">DATE: ${dateStr} ${timeStr}</div>
+                        <div class="receipt-info">ORDER NO: #${orderNum}</div>
+                        <div class="receipt-info">GUEST: ${state.people}명</div>
                     </div>
-                    <div class="menu-reason">- 추천 이유: ${menu.reason}</div>
+                    <div class="receipt-body">
+            `;
+
+            menuData.forEach((menu, index) => {
+                html += `
+                        <div class="receipt-item">
+                            <div class="item-row">
+                                <span><span class="item-medal">${menu.medal}</span> ${menu.name}</span>
+                                <span>1</span>
+                            </div>
+                            <div class="item-reason">${menu.reason}</div>
+                        </div>
                 `;
-                container.appendChild(itemDiv);
             });
+
+            html += `
+                    </div>
+                    <div class="receipt-footer">
+                        <div class="total-msg">맛있게 드세요! 🍽️</div>
+                        <div class="barcode">|||| ||||| ||| |||</div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
 
             setTimeout(() => {
                 bgm.pause();
