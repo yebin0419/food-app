@@ -174,6 +174,17 @@
             margin-top: 10px;
         }
 
+        #ingredient-msg {
+            font-weight: bold;
+            color: #FF9800;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.6;
+            text-align: center;
+        }
+
         /* --- 힙한 영수증 UI 스타일 --- */
         #result-container {
             width: 100%;
@@ -324,7 +335,7 @@
 
             <div class="screen">
                 <h2>오늘은 어떤 맛이 끌리나요?</h2>
-                <div class="btn-grid">
+                <div class="btn-grid" id="flavor-btn-grid">
                     <button class="choice-btn" onclick="saveAndNext('flavor', null, '매운 맛')">🌶️ 매운 맛</button>
                     <button class="choice-btn" onclick="saveAndNext('flavor', null, '달달한 맛')">🍯 달달한 맛</button>
                     <button class="choice-btn" onclick="saveAndNext('flavor', null, '칼칼한 맛')">🍲 칼칼한 맛</button>
@@ -476,9 +487,32 @@
                 }
             }
 
+            // 스타일을 선택하고 넘어갈 때 디저트 여부 확인해서 맛 동적 라우팅
+            if (key === 'style') {
+                const flavorGrid = document.getElementById('flavor-btn-grid');
+                if (state.cuisine === '디저트') {
+                    flavorGrid.innerHTML = `
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '달달한 맛')">🍯 달달한 맛</button>
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '상큼한 맛')">🍋 상큼한 맛</button>
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '부드러운 맛')">☁️ 부드러운 맛</button>
+                    `;
+                } else {
+                    flavorGrid.innerHTML = `
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '매운 맛')">🌶️ 매운 맛</button>
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '달달한 맛')">🍯 달달한 맛</button>
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '칼칼한 맛')">🍲 칼칼한 맛</button>
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '느끼한 맛')">🧀 느끼한 맛</button>
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '상큼한 맛')">🍋 상큼한 맛</button>
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '짠맛')">🧂 짠맛</button>
+                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '감칠맛')">🍄 감칠맛</button>
+                    `;
+                }
+            }
+
             nextScreen();
         }
 
+        // 🔥 여기가 수정된 부분입니다: 위/아래 2줄로 완벽 분리
         function handleIngredient() {
             const val = document.getElementById('input-ingredient').value;
             if (!val) return alert("식재료를 입력해주세요!");
@@ -486,7 +520,12 @@
             
             const msgDiv = document.getElementById('ingredient-msg');
             msgDiv.style.display = 'flex';
-            msgDiv.innerHTML = `<span>알겠습니다!</span><br><span style="color:#D32F2F;">'${val}'</span><span>(이)가 들어간 음식을 만들어 볼게요!</span>`;
+            msgDiv.innerHTML = `
+                <div style="font-size: 28px; margin-bottom: 10px;">알겠습니다!</div>
+                <div style="font-size: 20px;">
+                    <span style="color:#D32F2F;">'${val}'</span>(이)가 들어간<br>음식을 만들어 볼게요!
+                </div>
+            `;
             
             nextScreen(); 
             setTimeout(() => { nextScreen(); }, 2000);
@@ -526,7 +565,6 @@
         }
 
         async function fetchRecommendations() {
-            // 🔥 프롬프트 수정: AI가 이름 옆에 이모지를 반드시 넣도록 강력하게 지시!
             const prompt = `
 당신은 트렌디하고 창의적인 미식 추천 전문가입니다. 
 상황: 인원(${state.people}명), 장르(${state.cuisine}), 스타일(${state.style}), 맛(${state.flavor}), 날씨(${state.weather}), 나이대(${state.age}), 원하는 식재료(${state.ingredient}), 알레르기/제외식재료(${state.allergy}).
@@ -534,7 +572,7 @@
 규칙:
 1. 알레르기 식재료는 무조건 배제하세요.
 2. 장르(${state.cuisine})에 완벽하게 들어맞는 창의적이고 트렌디한 메뉴 3가지를 추천하세요.
-3. 각 음식 이름(name)의 맨 끝에, 그 음식과 가장 잘 어울리는 이모지를 하나씩 반드시 포함해서 출력하세요. (예: "마라탕 🍲", "초코 아이스크림 🍦", "명란 파스타 🍝")
+3. 각 음식 이름(name)의 맨 끝에, 그 음식과 가장 잘 어울리는 이모지를 하나씩 반드시 포함해서 출력하세요. (예: "마라탕 🍲", "딸기 빙수 🍧", "마카롱 🍬")
 4. 출력 형식은 반드시 아래의 JSON 배열 포맷만 출력하세요. (마크다운 설명 금지)
 
 JSON 포맷:
@@ -586,11 +624,9 @@ JSON 포맷:
                     <div class="receipt-body">
             `;
 
-            // 🔥 핵심! AI가 뭐라고 하든 프론트엔드에서 무조건 1,2,3등 메달 이모지를 박아버립니다.
             const medals = ['🥇', '🥈', '🥉'];
 
             menuData.forEach((menu, index) => {
-                // index가 0이면 🥇, 1이면 🥈, 2이면 🥉. 만약 4번째 메뉴가 오면 기본 메달 🏅
                 const currentMedal = medals[index] || '🏅';
 
                 html += `
@@ -624,4 +660,4 @@ JSON 포맷:
         }
     </script>
 </body>
-</html>
+    </html>
