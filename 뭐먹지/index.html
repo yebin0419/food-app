@@ -252,6 +252,62 @@
             margin-top: 5px;
         }
 
+        /* --- ✨ 보글보글 냄비 애니메이션 스타일 추가 --- */
+        .pot-container {
+            position: relative;
+            width: 120px;
+            height: 100px;
+            margin-bottom: 30px;
+        }
+        .pot-body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: #555;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: inset -10px -10px 15px rgba(0,0,0,0.2);
+        }
+        .pot-lid {
+            position: absolute;
+            top: 25px;
+            left: 5%;
+            width: 90%;
+            height: 15px;
+            background: #444;
+            border-radius: 20px 20px 0 0;
+            animation: lid-dance 0.4s infinite alternate;
+        }
+        @keyframes lid-dance {
+            to { transform: translateY(-8px) rotate(4deg); }
+        }
+        .steam {
+            position: absolute;
+            top: 0;
+            width: 12px;
+            height: 25px;
+            background: rgba(200, 200, 200, 0.5);
+            border-radius: 50%;
+            filter: blur(4px);
+            animation: steam-rise 1.5s infinite;
+            opacity: 0;
+        }
+        .s1 { left: 25px; animation-delay: 0.2s; }
+        .s2 { left: 55px; animation-delay: 0.8s; }
+        .s3 { left: 85px; animation-delay: 0.4s; }
+        @keyframes steam-rise {
+            0% { transform: translateY(20px) scale(1); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-50px) scale(2); opacity: 0; }
+        }
+        #loading-text {
+            font-size: 26px;
+            font-weight: bold;
+            color: #FF9800;
+            margin-top: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -347,8 +403,14 @@
             </div>
 
             <div class="screen">
-                <h2 style="font-size: 28px; color: #FF9800;">👩‍🍳 음식을 만드는 중입니다!</h2>
-                <h2>잠시만 기다려 주세요 : )</h2>
+                <div class="pot-container">
+                    <div class="steam s1"></div>
+                    <div class="steam s2"></div>
+                    <div class="steam s3"></div>
+                    <div class="pot-body"></div>
+                    <div class="pot-lid"></div>
+                </div>
+                <div id="loading-text">👩‍🍳 음식을 만드는 중입니다!</div>
             </div>
 
             <div class="screen">
@@ -399,11 +461,33 @@
             }, 2000);
         }
 
+        // --- 텍스트가 재미있게 변하는 로딩 이펙트 ---
+        function startLoadingEffect() {
+            const texts = [
+                "👩‍🍳 음식을 만드는 중입니다!", 
+                "🔥 맛있게 불 조절 중...", 
+                "🥕 신선한 재료 손질 중...", 
+                "✨ 예쁜 그릇에 담는 중!"
+            ];
+            let i = 0;
+            const el = document.getElementById('loading-text');
+            const interval = setInterval(() => {
+                // 현재 인덱스가 10(로딩 화면)이 아니면 타이머 종료
+                if (currentIndex !== 10) { 
+                    clearInterval(interval); 
+                    return; 
+                }
+                i++;
+                el.innerText = texts[i % texts.length];
+            }, 1200);
+        }
+
         function startCooking() {
             const allergyVal = document.getElementById('input-allergy').value;
             state['allergy'] = allergyVal || '없음';
 
             nextScreen(); 
+            startLoadingEffect(); // 로딩 이펙트 시작!
             
             bgm.volume = 0.5;
             bgm.load(); 
