@@ -244,14 +244,139 @@
         .total-msg { font-size: 18px; font-weight: bold; font-family: 'Noto Sans KR', sans-serif; color: #D32F2F; margin-bottom: 15px; }
         .barcode { font-size: 35px; font-weight: normal; letter-spacing: 2px; color: #111; opacity: 0.8; margin-top: 5px; }
 
-        /* --- ✨ 보글보글 냄비 애니메이션 --- */
-        .pot-container { position: relative; width: 120px; height: 100px; margin-bottom: 30px; }
-        .pot-body { position: absolute; bottom: 0; width: 100%; height: 60px; background: #555; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: inset -10px -10px 15px rgba(0,0,0,0.2); }
-        .pot-lid { position: absolute; top: 25px; left: 5%; width: 90%; height: 15px; background: #444; border-radius: 20px 20px 0 0; animation: lid-dance 0.4s infinite alternate; }
-        @keyframes lid-dance { to { transform: translateY(-8px) rotate(4deg); } }
-        .steam { position: absolute; top: 0; width: 12px; height: 25px; background: rgba(200, 200, 200, 0.5); border-radius: 50%; filter: blur(4px); animation: steam-rise 1.5s infinite; opacity: 0; }
-        .s1 { left: 25px; animation-delay: 0.2s; } .s2 { left: 55px; animation-delay: 0.8s; } .s3 { left: 85px; animation-delay: 0.4s; }
-        @keyframes steam-rise { 0% { transform: translateY(20px) scale(1); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-50px) scale(2); opacity: 0; } }
+        /* --- ✨ 귀염뽀짝 냄비 애니메이션 (NEW) --- */
+        .pot-container { 
+            position: relative; 
+            width: 140px; 
+            height: 120px; 
+            margin-bottom: 30px; 
+            display: flex;
+            justify-content: center;
+        }
+        /* 냄비 몸통 */
+        .pot-body { 
+            position: absolute; 
+            bottom: 0; 
+            width: 100px; 
+            height: 70px; 
+            background: #FFA726; /* 귀여운 파스텔 오렌지 */
+            border-radius: 20px 20px 40px 40px; 
+            box-shadow: inset -10px -10px 0 rgba(0,0,0,0.1); 
+            z-index: 2;
+        }
+        /* 냄비 손잡이 (양쪽 귀) */
+        .pot-handle {
+            position: absolute;
+            bottom: 30px;
+            width: 130px;
+            height: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 1;
+        }
+        .pot-handle::before, .pot-handle::after {
+            content: '';
+            width: 25px;
+            height: 20px;
+            background: #FB8C00; /* 몸통보다 살짝 진한 오렌지 */
+            border-radius: 10px;
+        }
+        /* 냄비 얼굴 (눈) */
+        .pot-face {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 3;
+        }
+        .pot-face::before, .pot-face::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: #555;
+            border-radius: 50%;
+        }
+        /* 냄비 입 (웃는 모양) */
+        .pot-mouth {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 5px;
+            border-bottom: 3px solid #555;
+            border-radius: 0 0 10px 10px;
+            z-index: 3;
+        }
+        /* 볼터치 */
+        .pot-blush {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 56px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 3;
+        }
+        .pot-blush::before, .pot-blush::after {
+            content: '';
+            width: 12px;
+            height: 6px;
+            background: rgba(255, 100, 100, 0.4);
+            border-radius: 50%;
+        }
+        /* 뚜껑 */
+        .pot-lid { 
+            position: absolute; 
+            bottom: 63px; /* 몸통 바로 위 */
+            width: 106px; 
+            height: 25px; 
+            background: #FFCC00; /* 노란색 뚜껑 */
+            border-radius: 30px 30px 0 0; 
+            animation: lid-dance 0.4s infinite alternate; 
+            z-index: 4;
+            box-shadow: inset -5px -5px 0 rgba(0,0,0,0.1);
+        }
+        /* 뚜껑 손잡이 */
+        .pot-lid::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 12px;
+            background: #FFB300;
+            border-radius: 10px 10px 0 0;
+        }
+        @keyframes lid-dance { 
+            to { transform: translateY(-6px) rotate(4deg); } 
+        }
+        /* 뽀글뽀글 하얀 구름 김 */
+        .steam { 
+            position: absolute; 
+            bottom: 70px; 
+            width: 20px; 
+            height: 20px; 
+            background: rgba(255, 255, 255, 0.8); 
+            border-radius: 50%; 
+            animation: steam-rise 1.5s infinite; 
+            opacity: 0; 
+            z-index: 0;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        .s1 { left: 40px; animation-delay: 0.2s; } 
+        .s2 { left: 60px; animation-delay: 0.8s; width: 25px; height: 25px; } 
+        .s3 { left: 80px; animation-delay: 0.4s; }
+        @keyframes steam-rise { 
+            0% { transform: translateY(0) scale(0.5); opacity: 0; } 
+            50% { opacity: 1; } 
+            100% { transform: translateY(-50px) scale(1.5); opacity: 0; } 
+        }
         #loading-text { font-size: 26px; font-weight: bold; color: #FF9800; margin-top: 10px; }
 
         /* --- ✨ 은은한 음식 이모지 애니메이션 --- */
@@ -390,7 +515,12 @@
                     <div class="steam s1"></div>
                     <div class="steam s2"></div>
                     <div class="steam s3"></div>
-                    <div class="pot-body"></div>
+                    <div class="pot-handle"></div>
+                    <div class="pot-body">
+                        <div class="pot-face"></div>
+                        <div class="pot-mouth"></div>
+                        <div class="pot-blush"></div>
+                    </div>
                     <div class="pot-lid"></div>
                 </div>
                 <div id="loading-text">👩‍🍳 음식을 만드는 중입니다!</div>
@@ -447,7 +577,6 @@
             typeEffect();
         };
 
-
         // --- 앱 상태 관리 및 로직 ---
         const state = {};
         let currentIndex = 0;
@@ -468,7 +597,6 @@
                 state[key] = directValue;
             }
 
-            // 디저트 선택 시 동적 라우팅
             if (key === 'cuisine') {
                 const styleGrid = document.getElementById('style-btn-grid');
                 if (state.cuisine === '디저트') {
@@ -487,7 +615,6 @@
                 }
             }
 
-            // 스타일을 선택하고 넘어갈 때 디저트 여부 확인해서 맛 동적 라우팅
             if (key === 'style') {
                 const flavorGrid = document.getElementById('flavor-btn-grid');
                 if (state.cuisine === '디저트') {
@@ -512,7 +639,6 @@
             nextScreen();
         }
 
-        // 🔥 여기가 수정된 부분입니다: 위/아래 2줄로 완벽 분리
         function handleIngredient() {
             const val = document.getElementById('input-ingredient').value;
             if (!val) return alert("식재료를 입력해주세요!");
@@ -521,7 +647,7 @@
             const msgDiv = document.getElementById('ingredient-msg');
             msgDiv.style.display = 'flex';
             msgDiv.innerHTML = `
-                <div style="font-size: 28px; margin-bottom: 10px;">알겠습니다!</div>
+                <div style="font-size: 28px; margin-bottom: 15px;">알겠습니다!</div>
                 <div style="font-size: 20px;">
                     <span style="color:#D32F2F;">'${val}'</span>(이)가 들어간<br>음식을 만들어 볼게요!
                 </div>
@@ -571,9 +697,14 @@
 
 규칙:
 1. 알레르기 식재료는 무조건 배제하세요.
-2. 장르(${state.cuisine})에 완벽하게 들어맞는 창의적이고 트렌디한 메뉴 3가지를 추천하세요.
-3. 각 음식 이름(name)의 맨 끝에, 그 음식과 가장 잘 어울리는 이모지를 하나씩 반드시 포함해서 출력하세요. (예: "마라탕 🍲", "딸기 빙수 🍧", "마카롱 🍬")
-4. 출력 형식은 반드시 아래의 JSON 배열 포맷만 출력하세요. (마크다운 설명 금지)
+2. 🔥입력된 인원수(${state.people}명)를 추천 시 가장 1순위로 고려하세요! 
+   - 1명이면 혼자 먹기 편한 1인분 식사나 1인 세트
+   - 2명이면 커플/데이트용 메뉴나 2인 세트
+   - 3명 이상이면 다 같이 나눠 먹을 수 있는 푸짐한 전골, 플래터, 파티 사이즈 메뉴 등을 추천하세요.
+3. 추천 이유(reason)를 작성할 때, 반드시 "${state.people}명이서 먹기 좋은~", "혼자서 즐기기 좋은~", "여럿이 나눠 먹기 좋은~" 처럼 인원수를 구체적으로 언급하며 설명하세요.
+4. 장르(${state.cuisine})와 스타일(${state.style})에 완벽하게 들어맞는 창의적이고 트렌디한 메뉴 3가지를 추천하세요.
+5. 각 음식 이름(name)의 맨 끝에, 그 음식과 가장 잘 어울리는 이모지를 하나씩 반드시 포함해서 출력하세요. (예: "마라탕 🍲")
+6. 출력 형식은 반드시 아래의 JSON 배열 포맷만 출력하세요. (마크다운 설명 금지)
 
 JSON 포맷:
 [
@@ -660,4 +791,4 @@ JSON 포맷:
         }
     </script>
 </body>
-    </html>
+</html>
