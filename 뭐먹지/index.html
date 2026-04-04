@@ -308,6 +308,41 @@
             margin-top: 10px;
         }
 
+        /* --- ✨ 은은한 음식 이모지 애니메이션 스타일 추가 ⭐ --- */
+        /* 이모지들이 떠다닐 배경 레이어 */
+        #emoji-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* 앱 컨텐츠 뒤로 숨기기 */
+        }
+        .floating-emoji {
+            position: absolute;
+            bottom: -50px; /* 화면 아래에서 시작 */
+            font-size: 30px;
+            opacity: 0; /* 처음엔 투명하게 */
+            animation: emoji-float 10s infinite ease-in-out;
+        }
+        /* 각 이모지마다 다른 투명도와 애니메이션 시간을 주어 은은하게 만듦 */
+        .emoji-1 { left: 10%; animation-duration: 8s; opacity: 0.1; }
+        .emoji-2 { left: 30%; animation-duration: 12s; opacity: 0.05; animation-delay: 2s; }
+        .emoji-3 { left: 50%; animation-duration: 10s; opacity: 0.15; animation-delay: 4s; }
+        .emoji-4 { left: 70%; animation-duration: 14s; opacity: 0.08; animation-delay: 1s; }
+        .emoji-5 { left: 90%; animation-duration: 11s; opacity: 0.12; animation-delay: 5s; }
+        .emoji-6 { left: 20%; animation-duration: 9s; opacity: 0.06; animation-delay: 3s; }
+        .emoji-7 { left: 60%; animation-duration: 13s; opacity: 0.14; animation-delay: 6s; }
+        .emoji-8 { left: 80%; animation-duration: 10s; opacity: 0.09; animation-delay: 7s; }
+
+        @keyframes emoji-float {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 1; } /* 은은하게 서서히 나타남 */
+            90% { opacity: 1; } /* 화면 끝 근처까지 유지 */
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } /* 화면 위로 사라지며 다시 투명해짐 */
+        }
+
     </style>
 </head>
 <body>
@@ -315,6 +350,17 @@
     <audio id="cooking-bgm" src="cooking.mp3" loop></audio>
 
     <div id="app-container">
+        <div id="emoji-background">
+            <span class="floating-emoji emoji-1">🍕</span>
+            <span class="floating-emoji emoji-2">🍜</span>
+            <span class="floating-emoji emoji-3">🍰</span>
+            <span class="floating-emoji emoji-4">🍣</span>
+            <span class="floating-emoji emoji-5">🍔</span>
+            <span class="floating-emoji emoji-6">🍦</span>
+            <span class="floating-emoji emoji-7">🍤</span>
+            <span class="floating-emoji emoji-8">🍰</span>
+        </div>
+
         <div id="slider">
             
             <div class="screen" id="screen-start">
@@ -343,7 +389,7 @@
 
             <div class="screen">
                 <h2>음식의 스타일을 골라주세요</h2>
-                <div class="btn-grid" id="style-btn-grid">
+                <div class="btn-grid">
                     <button class="choice-btn" onclick="saveAndNext('style', null, '면')">🍜 면</button>
                     <button class="choice-btn" onclick="saveAndNext('style', null, '밥')">🍚 밥</button>
                     <button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>
@@ -442,26 +488,6 @@
             } else if (directValue) {
                 state[key] = directValue;
             }
-
-            // 🔥 디저트를 선택했는지 확인하고 다음 스타일 버튼을 동적으로 교체하는 로직
-            if (key === 'cuisine') {
-                const styleGrid = document.getElementById('style-btn-grid');
-                if (state.cuisine === '디저트') {
-                    styleGrid.innerHTML = `
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '떡')">🍡 떡</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '쿠키')">🍪 쿠키</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '냉동 디저트')">🍦 냉동 디저트</button>
-                    `;
-                } else {
-                    styleGrid.innerHTML = `
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '면')">🍜 면</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '밥')">🍚 밥</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>
-                    `;
-                }
-            }
-
             nextScreen();
         }
 
