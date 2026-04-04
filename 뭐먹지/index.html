@@ -10,12 +10,22 @@
         /* 영수증 전용 폰트 (타자기 느낌) */
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+        /* --- ✨ 무빙 그라데이션 애니메이션 추가 --- */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Noto Sans KR', sans-serif;
             overflow: hidden;
-            background-color: #F9F9F9;
+            /* 따뜻하고 식욕을 돋우는 파스텔톤 그라데이션 배경 */
+            background: linear-gradient(-45deg, #fdfbfb, #fff5d1, #ffebc2, #ffe0cc);
+            background-size: 400% 400%;
+            animation: movingGradient 15s ease infinite;
+        }
+
+        @keyframes movingGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         #app-container {
@@ -94,7 +104,8 @@
             max-width: 500px;
         }
         .choice-btn {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8); /* 반투명 효과 적용 */
+            backdrop-filter: blur(5px);
             border: 2px solid #FFCC00;
             border-radius: 15px;
             padding: 15px 25px;
@@ -122,6 +133,7 @@
             text-align: center;
             margin-bottom: 20px;
             font-family: inherit;
+            background-color: rgba(255, 255, 255, 0.9);
         }
         input:focus {
             outline: none;
@@ -157,7 +169,6 @@
             max-height: 65vh;
             overflow-y: auto;
             margin-bottom: 20px;
-            /* 스크롤바 숨기기 (영수증 감성 유지) */
             scrollbar-width: none; 
         }
         #result-container::-webkit-scrollbar {
@@ -170,13 +181,12 @@
             margin: 10px auto;
             box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
             position: relative;
-            font-family: 'Courier Prime', monospace; /* 타자기 폰트 적용 */
+            font-family: 'Courier Prime', monospace;
             text-align: left;
             color: #222;
             border: 1px solid #eaeaea;
-            border-top: 4px solid #D32F2F; /* 영수증 상단 포인트 컬러 */
+            border-top: 4px solid #D32F2F; 
         }
-        /* 영수증 하단 지그재그 모양 효과 */
         .receipt-paper::after {
             content: "";
             position: absolute;
@@ -226,7 +236,7 @@
             font-size: 13px;
             color: #555;
             line-height: 1.5;
-            font-family: 'Noto Sans KR', sans-serif; /* 이유는 읽기 편하게 원래 폰트로 */
+            font-family: 'Noto Sans KR', sans-serif; 
             padding-left: 5px;
             border-left: 2px solid #eee;
         }
@@ -252,7 +262,7 @@
             margin-top: 5px;
         }
 
-        /* --- ✨ 보글보글 냄비 애니메이션 스타일 추가 --- */
+        /* --- ✨ 보글보글 냄비 애니메이션 스타일 --- */
         .pot-container {
             position: relative;
             width: 120px;
@@ -308,8 +318,7 @@
             margin-top: 10px;
         }
 
-        /* --- ✨ 은은한 음식 이모지 애니메이션 스타일 추가 ⭐ --- */
-        /* 이모지들이 떠다닐 배경 레이어 */
+        /* --- ✨ 은은한 음식 이모지 애니메이션 --- */
         #emoji-background {
             position: absolute;
             top: 0;
@@ -317,16 +326,15 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: -1; /* 앱 컨텐츠 뒤로 숨기기 */
+            z-index: -1; 
         }
         .floating-emoji {
             position: absolute;
-            bottom: -50px; /* 화면 아래에서 시작 */
+            bottom: -50px; 
             font-size: 30px;
-            opacity: 0; /* 처음엔 투명하게 */
+            opacity: 0; 
             animation: emoji-float 10s infinite ease-in-out;
         }
-        /* 각 이모지마다 다른 투명도와 애니메이션 시간을 주어 은은하게 만듦 */
         .emoji-1 { left: 10%; animation-duration: 8s; opacity: 0.1; }
         .emoji-2 { left: 30%; animation-duration: 12s; opacity: 0.05; animation-delay: 2s; }
         .emoji-3 { left: 50%; animation-duration: 10s; opacity: 0.15; animation-delay: 4s; }
@@ -338,9 +346,9 @@
 
         @keyframes emoji-float {
             0% { transform: translateY(0); opacity: 0; }
-            10% { opacity: 1; } /* 은은하게 서서히 나타남 */
-            90% { opacity: 1; } /* 화면 끝 근처까지 유지 */
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } /* 화면 위로 사라지며 다시 투명해짐 */
+            10% { opacity: 1; } 
+            90% { opacity: 1; } 
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
         }
 
     </style>
@@ -389,7 +397,7 @@
 
             <div class="screen">
                 <h2>음식의 스타일을 골라주세요</h2>
-                <div class="btn-grid">
+                <div class="btn-grid" id="style-btn-grid">
                     <button class="choice-btn" onclick="saveAndNext('style', null, '면')">🍜 면</button>
                     <button class="choice-btn" onclick="saveAndNext('style', null, '밥')">🍚 밥</button>
                     <button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>
@@ -461,8 +469,7 @@
 
             <div class="screen">
                 <h2>오늘 이 음식 어떠세요?</h2>
-                <div id="result-container">
-                    </div>
+                <div id="result-container"></div>
                 <button class="action-btn" style="margin-top: 20px;" onclick="resetApp()">다시 추천받기 🔄</button>
             </div>
 
@@ -488,6 +495,26 @@
             } else if (directValue) {
                 state[key] = directValue;
             }
+
+            // 🔥 디저트를 선택했는지 확인하고 다음 스타일 버튼 교체
+            if (key === 'cuisine') {
+                const styleGrid = document.getElementById('style-btn-grid');
+                if (state.cuisine === '디저트') {
+                    styleGrid.innerHTML = `
+                        <button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>
+                        <button class="choice-btn" onclick="saveAndNext('style', null, '떡')">🍡 떡</button>
+                        <button class="choice-btn" onclick="saveAndNext('style', null, '쿠키')">🍪 쿠키</button>
+                        <button class="choice-btn" onclick="saveAndNext('style', null, '냉동 디저트')">🍦 냉동 디저트</button>
+                    `;
+                } else {
+                    styleGrid.innerHTML = `
+                        <button class="choice-btn" onclick="saveAndNext('style', null, '면')">🍜 면</button>
+                        <button class="choice-btn" onclick="saveAndNext('style', null, '밥')">🍚 밥</button>
+                        <button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>
+                    `;
+                }
+            }
+
             nextScreen();
         }
 
@@ -518,7 +545,6 @@
             let i = 0;
             const el = document.getElementById('loading-text');
             const interval = setInterval(() => {
-                // 현재 인덱스가 10(로딩 화면)이 아니면 타이머 종료
                 if (currentIndex !== 10) { 
                     clearInterval(interval); 
                     return; 
@@ -533,7 +559,7 @@
             state['allergy'] = allergyVal || '없음';
 
             nextScreen(); 
-            startLoadingEffect(); // 로딩 이펙트 시작!
+            startLoadingEffect(); 
             
             bgm.volume = 0.5;
             bgm.load(); 
@@ -582,7 +608,6 @@ JSON 포맷:
 
             } catch (error) {
                 console.error("Error:", error);
-                
                 const container = document.getElementById('result-container');
                 container.innerHTML = `
                     <div style="color: #D32F2F; font-weight: bold; background: #ffebee; padding: 20px; border-radius: 10px; text-align: center;">
@@ -590,25 +615,16 @@ JSON 포맷:
                         <p style="word-break: keep-all; line-height: 1.5;">서버와의 연결이 끊어졌거나 통신 중 오류가 발생했습니다.</p>
                     </div>
                 `;
-                
-                setTimeout(() => {
-                    bgm.pause();
-                    bgm.currentTime = 0;
-                    nextScreen();
-                }, 1500); 
+                setTimeout(() => { bgm.pause(); bgm.currentTime = 0; nextScreen(); }, 1500); 
             }
         }
 
         // --- 영수증 UI 렌더링 함수 ---
         function renderResults(menuData) {
             const container = document.getElementById('result-container');
-            
-            // 현재 날짜 및 시간 구하기 포맷팅
             const now = new Date();
             const dateStr = now.getFullYear() + '.' + String(now.getMonth() + 1).padStart(2, '0') + '.' + String(now.getDate()).padStart(2, '0');
             const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
-            
-            // 주문번호 랜덤 생성
             const orderNum = Math.floor(Math.random() * 900) + 100;
 
             let html = `
@@ -642,20 +658,13 @@ JSON 포맷:
                     </div>
                 </div>
             `;
-
             container.innerHTML = html;
-
-            setTimeout(() => {
-                bgm.pause();
-                bgm.currentTime = 0;
-                nextScreen();
-            }, 1500);
+            setTimeout(() => { bgm.pause(); bgm.currentTime = 0; nextScreen(); }, 1500);
         }
 
         function resetApp() {
             document.querySelectorAll('input').forEach(input => input.value = '');
             for (let key in state) delete state[key];
-            
             currentIndex = 0;
             slider.style.transform = `translateX(0vw)`;
         }
