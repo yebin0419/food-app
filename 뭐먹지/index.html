@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="#"> 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
-        /* 영수증 전용 폰트 (타자기 느낌) */
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
         /* --- ✨ 무빙 그라데이션 애니메이션 --- */
@@ -253,7 +252,6 @@
             display: flex;
             justify-content: center;
         }
-        /* 냄비 몸통 (회색) */
         .pot-body { 
             position: absolute; 
             bottom: 0; 
@@ -264,7 +262,6 @@
             box-shadow: inset -10px -10px 0 rgba(0,0,0,0.1); 
             z-index: 2;
         }
-        /* 냄비 손잡이 양쪽 귀 (진한 회색) */
         .pot-handle {
             position: absolute;
             bottom: 30px;
@@ -281,7 +278,6 @@
             background: #757575; 
             border-radius: 10px;
         }
-        /* 냄비 얼굴 (눈) */
         .pot-face {
             position: absolute;
             bottom: 30px;
@@ -299,7 +295,6 @@
             background: #444; 
             border-radius: 50%;
         }
-        /* 냄비 입 (웃는 모양) */
         .pot-mouth {
             position: absolute;
             bottom: 22px;
@@ -311,7 +306,6 @@
             border-radius: 0 0 10px 10px;
             z-index: 3;
         }
-        /* 볼터치 (회색에 어울리게 살짝 핑크빛 유지) */
         .pot-blush {
             position: absolute;
             bottom: 25px;
@@ -329,7 +323,6 @@
             background: rgba(255, 120, 120, 0.5);
             border-radius: 50%;
         }
-        /* 뚜껑 (밝은 회색) */
         .pot-lid { 
             position: absolute; 
             bottom: 63px; 
@@ -341,7 +334,6 @@
             z-index: 4;
             box-shadow: inset -5px -5px 0 rgba(0,0,0,0.05);
         }
-        /* 뚜껑 손잡이 (진한 회색) */
         .pot-lid::before {
             content: '';
             position: absolute;
@@ -353,10 +345,7 @@
             background: #757575; 
             border-radius: 10px 10px 0 0;
         }
-        @keyframes lid-dance { 
-            to { transform: translateY(-6px) rotate(4deg); } 
-        }
-        /* 뽀글뽀글 하얀 구름 김 */
+        @keyframes lid-dance { to { transform: translateY(-6px) rotate(4deg); } }
         .steam { 
             position: absolute; 
             bottom: 70px; 
@@ -367,7 +356,6 @@
             animation: steam-rise 1.5s infinite; 
             opacity: 0; 
             z-index: 0;
-            box-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
         .s1 { left: 40px; animation-delay: 0.2s; } 
         .s2 { left: 60px; animation-delay: 0.8s; width: 25px; height: 25px; } 
@@ -398,7 +386,6 @@
         @keyframes emoji-float {
             0% { transform: translateY(0); opacity: 0; }
             10% { opacity: 1; } 
-            90% { opacity: 1; } 
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
         }
 
@@ -410,24 +397,17 @@
 
     <div id="app-container">
         <div id="emoji-background">
-            <span class="floating-emoji emoji-1">🍕</span>
-            <span class="floating-emoji emoji-2">🍜</span>
-            <span class="floating-emoji emoji-3">🍰</span>
-            <span class="floating-emoji emoji-4">🍣</span>
-            <span class="floating-emoji emoji-5">🍔</span>
-            <span class="floating-emoji emoji-6">🍦</span>
-            <span class="floating-emoji emoji-7">🍤</span>
-            <span class="floating-emoji emoji-8">🍰</span>
+            <span class="floating-emoji emoji-1">🍕</span><span class="floating-emoji emoji-2">🍜</span>
+            <span class="floating-emoji emoji-3">🍰</span><span class="floating-emoji emoji-4">🍣</span>
+            <span class="floating-emoji emoji-5">🍔</span><span class="floating-emoji emoji-6">🍦</span>
+            <span class="floating-emoji emoji-7">🍤</span><span class="floating-emoji emoji-8">🍡</span>
         </div>
 
         <div id="slider">
-            
             <div class="screen" id="screen-start">
                 <div class="logo-container">
                     <img src="logo_high.png" alt="뭐 먹지 로고" class="logo-img" onerror="this.src='https://placehold.co/200x200/FFCC00/ffffff?text=뭐+먹지'">
-                    <div id="typing-container">
-                        <span id="typing-text"></span><span class="cursor"></span>
-                    </div>
+                    <div id="typing-container"><span id="typing-text"></span><span class="cursor"></span></div>
                 </div>
                 <button class="start-btn" onclick="nextScreen()">메뉴를 추천해줘!</button>
             </div>
@@ -473,24 +453,12 @@
 
             <div class="screen">
                 <h2>오늘 날씨는 어떤가요?</h2>
-                <div class="btn-grid">
-                    <button class="choice-btn" onclick="saveAndNext('weather', null, '맑음')">☀️ 맑음</button>
-                    <button class="choice-btn" onclick="saveAndNext('weather', null, '흐림')">☁️ 흐림</button>
-                    <button class="choice-btn" onclick="saveAndNext('weather', null, '비')">🌧️ 비</button>
-                    <button class="choice-btn" onclick="saveAndNext('weather', null, '눈')">❄️ 눈</button>
-                </div>
+                <div class="btn-grid"><button class="choice-btn" onclick="saveAndNext('weather', null, '맑음')">☀️ 맑음</button><button class="choice-btn" onclick="saveAndNext('weather', null, '흐림')">☁️ 흐림</button><button class="choice-btn" onclick="saveAndNext('weather', null, '비')">🌧️ 비</button><button class="choice-btn" onclick="saveAndNext('weather', null, '눈')">❄️ 눈</button></div>
             </div>
 
             <div class="screen">
                 <h2>나이대를 선택해주세요</h2>
-                <div class="btn-grid">
-                    <button class="choice-btn" onclick="saveAndNext('age', null, '10대')">10대</button>
-                    <button class="choice-btn" onclick="saveAndNext('age', null, '20대')">20대</button>
-                    <button class="choice-btn" onclick="saveAndNext('age', null, '30대')">30대</button>
-                    <button class="choice-btn" onclick="saveAndNext('age', null, '40대')">40대</button>
-                    <button class="choice-btn" onclick="saveAndNext('age', null, '50대')">50대</button>
-                    <button class="choice-btn" onclick="saveAndNext('age', null, '60대')">60대</button>
-                </div>
+                <div class="btn-grid"><button class="choice-btn" onclick="saveAndNext('age', null, '10대')">10대</button><button class="choice-btn" onclick="saveAndNext('age', null, '20대')">20대</button><button class="choice-btn" onclick="saveAndNext('age', null, '30대')">30대</button><button class="choice-btn" onclick="saveAndNext('age', null, '40대')">40대</button><button class="choice-btn" onclick="saveAndNext('age', null, '50대')">50대</button><button class="choice-btn" onclick="saveAndNext('age', null, '60대')">60대</button></div>
             </div>
 
             <div class="screen" id="screen-ingredient-input">
@@ -499,9 +467,7 @@
                 <button class="action-btn" onclick="handleIngredient()">입력 완료</button>
             </div>
 
-            <div class="screen" id="screen-ingredient-confirm">
-                <div id="ingredient-msg"></div>
-            </div>
+            <div class="screen" id="screen-ingredient-confirm"><div id="ingredient-msg"></div></div>
 
             <div class="screen">
                 <h2>혹시 알레르기가 있으신가요?</h2>
@@ -512,130 +478,65 @@
 
             <div class="screen">
                 <div class="pot-container">
-                    <div class="steam s1"></div>
-                    <div class="steam s2"></div>
-                    <div class="steam s3"></div>
-                    <div class="pot-handle"></div>
-                    <div class="pot-body">
-                        <div class="pot-face"></div>
-                        <div class="pot-mouth"></div>
-                        <div class="pot-blush"></div>
-                    </div>
+                    <div class="steam s1"></div><div class="steam s2"></div><div class="steam s3"></div>
+                    <div class="pot-handle"></div><div class="pot-body"><div class="pot-face"></div><div class="pot-mouth"></div><div class="pot-blush"></div></div>
                     <div class="pot-lid"></div>
                 </div>
                 <div id="loading-text">👩‍🍳 음식을 만드는 중입니다!</div>
             </div>
 
-            <div class="screen">
-                <h2>오늘 이 음식 어떠세요?</h2>
-                <div id="result-container"></div>
-                <button class="action-btn" style="margin-top: 20px;" onclick="resetApp()">다시 추천받기 🔄</button>
-            </div>
-
+            <div class="screen"><h2>오늘 이 음식 어떠세요?</h2><div id="result-container"></div><button class="action-btn" style="margin-top: 20px;" onclick="resetApp()">다시 추천받기 🔄</button></div>
         </div>
     </div>
 
     <script>
-        // --- ✨ 첫 화면 타이핑 효과 ---
-        const typingPhrases = [
-            "오늘 점심 뭐 먹지? 🤔",
-            "스트레스 팍! 풀리는 맛 🌶️",
-            "결정장애를 위한 1분 미식 큐레이션! ✨",
-            "당신만을 위한 AI 쉐프 👩‍🍳"
-        ];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
+        const typingPhrases = ["오늘 점심 뭐 먹지? 🤔", "스트레스 팍! 풀리는 맛 🌶️", "결정장애를 위한 1분 미식 큐레이션! ✨", "당신만을 위한 AI 쉐프 👩‍🍳"];
+        let phraseIndex = 0, charIndex = 0, isDeleting = false;
         function typeEffect() {
             const typingText = document.getElementById('typing-text');
             const currentPhrase = typingPhrases[phraseIndex];
-            
-            if (isDeleting) {
-                typingText.innerText = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingText.innerText = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
+            if (isDeleting) { typingText.innerText = currentPhrase.substring(0, charIndex - 1); charIndex--; }
+            else { typingText.innerText = currentPhrase.substring(0, charIndex + 1); charIndex++; }
             let typingSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                typingSpeed = 2000; 
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % typingPhrases.length;
-                typingSpeed = 500; 
-            }
-
+            if (!isDeleting && charIndex === currentPhrase.length) { typingSpeed = 2000; isDeleting = true; }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % typingPhrases.length; typingSpeed = 500; }
             setTimeout(typeEffect, typingSpeed);
         }
+        window.onload = () => { typeEffect(); };
 
-        window.onload = () => {
-            typeEffect();
-        };
-
-        // --- 앱 상태 관리 및 로직 ---
         const state = {};
         let currentIndex = 0;
-        const slider = document.getElementById('slider');
-        const bgm = document.getElementById('cooking-bgm');
+        const slider = document.getElementById('slider'), bgm = document.getElementById('cooking-bgm');
 
-        function nextScreen() {
-            currentIndex++;
-            slider.style.transform = `translateX(-${currentIndex * 100}vw)`;
-        }
+        function nextScreen() { currentIndex++; slider.style.transform = `translateX(-${currentIndex * 100}vw)`; }
 
         function saveAndNext(key, inputId, directValue = null) {
-            if (inputId) {
-                const val = document.getElementById(inputId).value;
-                if (!val) return alert("값을 입력해주세요!");
-                state[key] = val;
-            } else if (directValue) {
-                state[key] = directValue;
-            }
+            if (inputId) { const val = document.getElementById(inputId).value; if (!val) return alert("값을 입력해주세요!"); state[key] = val; }
+            else if (directValue) { state[key] = directValue; }
 
+            // 🔥 장르에 따른 스타일 버튼 동적 변경 로직
             if (key === 'cuisine') {
                 const styleGrid = document.getElementById('style-btn-grid');
                 if (state.cuisine === '디저트') {
-                    styleGrid.innerHTML = `
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '떡')">🍡 떡</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '쿠키')">🍪 쿠키</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '냉동 디저트')">🍦 냉동 디저트</button>
-                    `;
+                    styleGrid.innerHTML = `<button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button><button class="choice-btn" onclick="saveAndNext('style', null, '떡')">🍡 떡</button><button class="choice-btn" onclick="saveAndNext('style', null, '쿠키')">🍪 쿠키</button><button class="choice-btn" onclick="saveAndNext('style', null, '냉동 디저트')">🍦 냉동 디저트</button>`;
+                } else if (state.cuisine === '한식' || state.cuisine === '일식') {
+                    styleGrid.innerHTML = `<button class="choice-btn" onclick="saveAndNext('style', null, '면')">🍜 면</button><button class="choice-btn" onclick="saveAndNext('style', null, '밥')">🍚 밥</button><button class="choice-btn" onclick="saveAndNext('style', null, '전골')">🍲 전골</button>`;
+                } else if (state.cuisine === '중식') {
+                    styleGrid.innerHTML = `<button class="choice-btn" onclick="saveAndNext('style', null, '면')">🍜 면</button><button class="choice-btn" onclick="saveAndNext('style', null, '밥')">🍚 밥</button>`;
                 } else {
-                    styleGrid.innerHTML = `
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '면')">🍜 면</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '밥')">🍚 밥</button>
-                        <button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>
-                    `;
+                    styleGrid.innerHTML = `<button class="choice-btn" onclick="saveAndNext('style', null, '면')">🍜 면</button><button class="choice-btn" onclick="saveAndNext('style', null, '밥')">🍚 밥</button><button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>`;
                 }
             }
 
+            // 디저트 맛 동적 로직
             if (key === 'style') {
                 const flavorGrid = document.getElementById('flavor-btn-grid');
                 if (state.cuisine === '디저트') {
-                    flavorGrid.innerHTML = `
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '달달한 맛')">🍯 달달한 맛</button>
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '상큼한 맛')">🍋 상큼한 맛</button>
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '부드러운 맛')">☁️ 부드러운 맛</button>
-                    `;
+                    flavorGrid.innerHTML = `<button class="choice-btn" onclick="saveAndNext('flavor', null, '달달한 맛')">🍯 달달한 맛</button><button class="choice-btn" onclick="saveAndNext('flavor', null, '상큼한 맛')">🍋 상큼한 맛</button><button class="choice-btn" onclick="saveAndNext('flavor', null, '부드러운 맛')">☁️ 부드러운 맛</button>`;
                 } else {
-                    flavorGrid.innerHTML = `
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '매운 맛')">🌶️ 매운 맛</button>
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '달달한 맛')">🍯 달달한 맛</button>
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '칼칼한 맛')">🍲 칼칼한 맛</button>
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '느끼한 맛')">🧀 느끼한 맛</button>
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '상큼한 맛')">🍋 상큼한 맛</button>
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '짠맛')">🧂 짠맛</button>
-                        <button class="choice-btn" onclick="saveAndNext('flavor', null, '감칠맛')">🍄 감칠맛</button>
-                    `;
+                    flavorGrid.innerHTML = `<button class="choice-btn" onclick="saveAndNext('flavor', null, '매운 맛')">🌶️ 매운 맛</button><button class="choice-btn" onclick="saveAndNext('flavor', null, '달달한 맛')">🍯 달달한 맛</button><button class="choice-btn" onclick="saveAndNext('flavor', null, '칼칼한 맛')">🍲 칼칼한 맛</button><button class="choice-btn" onclick="saveAndNext('flavor', null, '느끼한 맛')">🧀 느끼한 맛</button><button class="choice-btn" onclick="saveAndNext('flavor', null, '상큼한 맛')">🍋 상큼한 맛</button><button class="choice-btn" onclick="saveAndNext('flavor', null, '짠맛')">🧂 짠맛</button><button class="choice-btn" onclick="saveAndNext('flavor', null, '감칠맛')">🍄 감칠맛</button>`;
                 }
             }
-
             nextScreen();
         }
 
@@ -643,152 +544,51 @@
             const val = document.getElementById('input-ingredient').value;
             if (!val) return alert("식재료를 입력해주세요!");
             state['ingredient'] = val;
-            
             const msgDiv = document.getElementById('ingredient-msg');
             msgDiv.style.display = 'flex';
-            msgDiv.innerHTML = `
-                <div style="font-size: 28px; margin-bottom: 15px;">알겠습니다!</div>
-                <div style="font-size: 20px;">
-                    <span style="color:#D32F2F;">'${val}'</span>(이)가 들어간<br>음식을 만들어 볼게요!
-                </div>
-            `;
-            
-            nextScreen(); 
-            setTimeout(() => { nextScreen(); }, 2000);
+            msgDiv.innerHTML = `<div style="font-size: 28px; margin-bottom: 10px;">알겠습니다!</div><div style="font-size: 20px;"><span style="color:#D32F2F;">'${val}'</span>(이)가 들어간<br>음식을 만들어 볼게요!</div>`;
+            nextScreen(); setTimeout(() => { nextScreen(); }, 2000);
         }
 
         function startLoadingEffect() {
-            const texts = [
-                "👩‍🍳 음식을 만드는 중입니다!", 
-                "🔥 맛있게 불 조절 중...", 
-                "🥕 신선한 재료 손질 중...", 
-                "✨ 예쁜 그릇에 담는 중!"
-            ];
-            let i = 0;
-            const el = document.getElementById('loading-text');
-            const interval = setInterval(() => {
-                if (currentIndex !== 10) { clearInterval(interval); return; }
-                i++;
-                el.innerText = texts[i % texts.length];
-            }, 1200);
+            const texts = ["👩‍🍳 음식을 만드는 중입니다!", "🔥 맛있게 불 조절 중...", "🥕 신선한 재료 손질 중...", "✨ 예쁜 그릇에 담는 중!"];
+            let i = 0; const el = document.getElementById('loading-text');
+            const interval = setInterval(() => { if (currentIndex !== 10) { clearInterval(interval); return; } i++; el.innerText = texts[i % texts.length]; }, 1200);
         }
 
         function startCooking() {
-            const allergyVal = document.getElementById('input-allergy').value;
-            state['allergy'] = allergyVal || '없음';
-
-            nextScreen(); 
-            startLoadingEffect(); 
-            
-            bgm.volume = 0.5;
-            bgm.load(); 
+            state['allergy'] = document.getElementById('input-allergy').value || '없음';
+            nextScreen(); startLoadingEffect();
+            bgm.volume = 0.5; bgm.load(); 
             const playPromise = bgm.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => console.error("오디오 자동 재생 제한", error));
-            }
-
+            if (playPromise !== undefined) playPromise.catch(e => console.log("자동재생 제한됨"));
             fetchRecommendations();
         }
 
         async function fetchRecommendations() {
-            const prompt = `
-당신은 트렌디하고 창의적인 미식 추천 전문가입니다. 
-상황: 인원(${state.people}명), 장르(${state.cuisine}), 스타일(${state.style}), 맛(${state.flavor}), 날씨(${state.weather}), 나이대(${state.age}), 원하는 식재료(${state.ingredient}), 알레르기/제외식재료(${state.allergy}).
-
-규칙:
-1. 알레르기 식재료는 무조건 배제하세요.
-2. 🔥입력된 인원수(${state.people}명)를 추천 시 가장 1순위로 고려하세요! 
-   - 1명이면 혼자 먹기 편한 1인분 식사나 1인 세트
-   - 2명이면 커플/데이트용 메뉴나 2인 세트
-   - 3명 이상이면 다 같이 나눠 먹을 수 있는 푸짐한 전골, 플래터, 파티 사이즈 메뉴 등을 추천하세요.
-3. 추천 이유(reason)를 작성할 때, 반드시 "${state.people}명이서 먹기 좋은~", "혼자서 즐기기 좋은~", "여럿이 나눠 먹기 좋은~" 처럼 인원수를 구체적으로 언급하며 설명하세요.
-4. 장르(${state.cuisine})와 스타일(${state.style})에 완벽하게 들어맞는 창의적이고 트렌디한 메뉴 3가지를 추천하세요.
-5. 각 음식 이름(name)의 맨 끝에, 그 음식과 가장 잘 어울리는 이모지를 하나씩 반드시 포함해서 출력하세요. (예: "마라탕 🍲")
-6. 출력 형식은 반드시 아래의 JSON 배열 포맷만 출력하세요. (마크다운 설명 금지)
-
-JSON 포맷:
-[
-  { "name": "음식명 이모지", "reason": "이유 설명" },
-  { "name": "음식명 이모지", "reason": "이유 설명" },
-  { "name": "음식명 이모지", "reason": "이유 설명" }
-]`;
-
+            const prompt = `인원(${state.people}명)을 최우선 고려해 메뉴 3개 추천. 1명은 혼밥, 2명은 커플, 3명 이상은 전골/플래터 위주. 이유에 "${state.people}명이서 먹기 좋은~" 언급 필수. 음식명 끝에 어울리는 이모지 포함. JSON 배열 [{name, reason}] 출력.`;
             try {
-                const response = await fetch('/api/recommend', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: prompt })
-                });
-
-                if (!response.ok) throw new Error("백엔드 서버 통신 에러 발생");
-                const menuData = await response.json();
-                renderResults(menuData);
-
-            } catch (error) {
-                console.error("Error:", error);
-                const container = document.getElementById('result-container');
-                container.innerHTML = `
-                    <div style="color: #D32F2F; font-weight: bold; background: #ffebee; padding: 20px; border-radius: 10px; text-align: center;">
-                        <h3 style="margin-top:0;">🚨 통신 에러 발생!</h3>
-                        <p style="word-break: keep-all; line-height: 1.5;">서버와의 연결이 끊어졌거나 통신 중 오류가 발생했습니다.</p>
-                    </div>
-                `;
-                setTimeout(() => { bgm.pause(); bgm.currentTime = 0; nextScreen(); }, 1500); 
-            }
+                const response = await fetch('/api/recommend', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt }) });
+                const menuData = await response.json(); renderResults(menuData);
+            } catch (error) { document.getElementById('result-container').innerHTML = "에러 발생!"; setTimeout(() => { bgm.pause(); nextScreen(); }, 1500); }
         }
 
         function renderResults(menuData) {
-            const container = document.getElementById('result-container');
-            const now = new Date();
+            const container = document.getElementById('result-container'), now = new Date();
             const dateStr = now.getFullYear() + '.' + String(now.getMonth() + 1).padStart(2, '0') + '.' + String(now.getDate()).padStart(2, '0');
             const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
             const orderNum = Math.floor(Math.random() * 900) + 100;
-
-            let html = `
-                <div class="receipt-paper">
-                    <div class="receipt-header">
-                        <div class="receipt-title">🧾 뭐 먹지 영수증</div>
-                        <div class="receipt-info">DATE: ${dateStr} ${timeStr}</div>
-                        <div class="receipt-info">ORDER NO: #${orderNum}</div>
-                        <div class="receipt-info">GUEST: ${state.people}명</div>
-                    </div>
-                    <div class="receipt-body">
-            `;
-
+            let html = `<div class="receipt-paper"><div class="receipt-header"><div class="receipt-title">🧾 뭐 먹지 영수증</div><div class="receipt-info">DATE: ${dateStr} ${timeStr}</div><div class="receipt-info">ORDER NO: #${orderNum}</div><div class="receipt-info">GUEST: ${state.people}명</div></div><div class="receipt-body">`;
             const medals = ['🥇', '🥈', '🥉'];
-
             menuData.forEach((menu, index) => {
                 const currentMedal = medals[index] || '🏅';
-
-                html += `
-                        <div class="receipt-item">
-                            <div class="item-row">
-                                <span><span class="item-medal">${currentMedal}</span> ${menu.name}</span>
-                                <span>1</span>
-                            </div>
-                            <div class="item-reason">${menu.reason}</div>
-                        </div>
-                `;
+                html += `<div class="receipt-item"><div class="item-row"><span><span class="item-medal">${currentMedal}</span> ${menu.name}</span><span>1</span></div><div class="item-reason">${menu.reason}</div></div>`;
             });
-
-            html += `
-                    </div>
-                    <div class="receipt-footer">
-                        <div class="total-msg">맛있게 드세요! 🍽️</div>
-                        <div class="barcode">|||| ||||| ||| |||</div>
-                    </div>
-                </div>
-            `;
-            container.innerHTML = html;
-            setTimeout(() => { bgm.pause(); bgm.currentTime = 0; nextScreen(); }, 1500);
+            html += `</div><div class="receipt-footer"><div class="total-msg">맛있게 드세요! 🍽️</div><div class="barcode">|||| ||||| ||| |||</div></div></div>`;
+            container.innerHTML = html; setTimeout(() => { bgm.pause(); nextScreen(); }, 1500);
         }
 
-        function resetApp() {
-            document.querySelectorAll('input').forEach(input => input.value = '');
-            for (let key in state) delete state[key];
-            currentIndex = 0;
-            slider.style.transform = `translateX(0vw)`;
-        }
+        function resetApp() { document.querySelectorAll('input').forEach(i => i.value = ''); for (let key in state) delete state[key]; currentIndex = 0; slider.style.transform = `translateX(0vw)`; }
     </script>
 </body>
 </html>
