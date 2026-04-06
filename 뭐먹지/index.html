@@ -386,9 +386,9 @@
         @keyframes emoji-float {
             0% { transform: translateY(0); opacity: 0; }
             10% { opacity: 1; } 
+            90% { opacity: 1; } 
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
         }
-
     </style>
 </head>
 <body>
@@ -432,23 +432,13 @@
             <div class="screen">
                 <h2>음식의 스타일을 골라주세요</h2>
                 <div class="btn-grid" id="style-btn-grid">
-                    <button class="choice-btn" onclick="saveAndNext('style', null, '면')">🍜 면</button>
-                    <button class="choice-btn" onclick="saveAndNext('style', null, '밥')">🍚 밥</button>
-                    <button class="choice-btn" onclick="saveAndNext('style', null, '빵')">🍞 빵</button>
-                </div>
+                    </div>
             </div>
 
             <div class="screen">
                 <h2>오늘은 어떤 맛이 끌리나요?</h2>
                 <div class="btn-grid" id="flavor-btn-grid">
-                    <button class="choice-btn" onclick="saveAndNext('flavor', null, '매운 맛')">🌶️ 매운 맛</button>
-                    <button class="choice-btn" onclick="saveAndNext('flavor', null, '달달한 맛')">🍯 달달한 맛</button>
-                    <button class="choice-btn" onclick="saveAndNext('flavor', null, '칼칼한 맛')">🍲 칼칼한 맛</button>
-                    <button class="choice-btn" onclick="saveAndNext('flavor', null, '느끼한 맛')">🧀 느끼한 맛</button>
-                    <button class="choice-btn" onclick="saveAndNext('flavor', null, '상큼한 맛')">🍋 상큼한 맛</button>
-                    <button class="choice-btn" onclick="saveAndNext('flavor', null, '짠맛')">🧂 짠맛</button>
-                    <button class="choice-btn" onclick="saveAndNext('flavor', null, '감칠맛')">🍄 감칠맛</button>
-                </div>
+                    </div>
             </div>
 
             <div class="screen">
@@ -528,7 +518,7 @@
                 }
             }
 
-            // 디저트 맛 동적 로직
+            // 🔥 디저트 맛 동적 변경 로직
             if (key === 'style') {
                 const flavorGrid = document.getElementById('flavor-btn-grid');
                 if (state.cuisine === '디저트') {
@@ -566,11 +556,42 @@
         }
 
         async function fetchRecommendations() {
-            const prompt = `인원(${state.people}명)을 최우선 고려해 메뉴 3개 추천. 1명은 혼밥, 2명은 커플, 3명 이상은 전골/플래터 위주. 이유에 "${state.people}명이서 먹기 좋은~" 언급 필수. 음식명 끝에 어울리는 이모지 포함. JSON 배열 [{name, reason}] 출력.`;
+            // 🔥 복원된 튼튼한 프롬프트! (절대 에러나지 않도록 수정)
+            const prompt = `
+당신은 트렌디하고 창의적인 미식 추천 전문가입니다. 
+상황: 인원(${state.people}명), 장르(${state.cuisine}), 스타일(${state.style}), 맛(${state.flavor}), 날씨(${state.weather}), 나이대(${state.age}), 원하는 식재료(${state.ingredient}), 알레르기/제외식재료(${state.allergy}).
+
+규칙:
+1. 알레르기 식재료는 무조건 배제하세요.
+2. 입력된 인원수(${state.people}명)를 추천 시 가장 1순위로 고려하세요! 
+   - 1명이면 혼자 먹기 편한 1인분 식사나 1인 세트
+   - 2명이면 커플/데이트용 메뉴나 2인 세트
+   - 3명 이상이면 다 같이 나눠 먹을 수 있는 푸짐한 전골, 플래터, 파티 사이즈 메뉴 등을 추천하세요.
+3. 추천 이유(reason)를 작성할 때, 반드시 "${state.people}명이서 먹기 좋은~", "혼자서 즐기기 좋은~" 처럼 인원수를 구체적으로 언급하며 설명하세요.
+4. 장르(${state.cuisine})와 스타일(${state.style})에 완벽하게 들어맞는 메뉴 3가지를 추천하세요.
+5. 각 음식 이름(name)의 맨 끝에, 그 음식과 가장 잘 어울리는 이모지를 하나씩 반드시 포함해서 출력하세요. (예: "밀푀유나베 🍲")
+6. 출력 형식은 반드시 아래의 JSON 배열 포맷만 출력하세요. 어떤 부가 설명도 마크다운도 허용하지 않습니다.
+
+[
+  { "name": "음식명 이모지", "reason": "이유 설명" },
+  { "name": "음식명 이모지", "reason": "이유 설명" },
+  { "name": "음식명 이모지", "reason": "이유 설명" }
+]`;
+
             try {
                 const response = await fetch('/api/recommend', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt }) });
-                const menuData = await response.json(); renderResults(menuData);
-            } catch (error) { document.getElementById('result-container').innerHTML = "에러 발생!"; setTimeout(() => { bgm.pause(); nextScreen(); }, 1500); }
+                if (!response.ok) throw new Error("서버 통신 에러");
+                const menuData = await response.json(); 
+                renderResults(menuData);
+            } catch (error) { 
+                console.error(error);
+                document.getElementById('result-container').innerHTML = `
+                    <div style="color: #D32F2F; font-weight: bold; background: #ffebee; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3 style="margin-top:0;">🚨 에러 발생!</h3>
+                        <p style="word-break: keep-all; line-height: 1.5;">AI가 응답을 생성하는 중 문제가 생겼습니다.</p>
+                    </div>`; 
+                setTimeout(() => { bgm.pause(); nextScreen(); }, 1500); 
+            }
         }
 
         function renderResults(menuData) {
