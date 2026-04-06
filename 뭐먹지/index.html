@@ -26,354 +26,99 @@
             100% { background-position: 0% 50%; }
         }
 
-        #app-container {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        #slider {
-            display: flex;
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-
+        #app-container { width: 100vw; height: 100vh; overflow: hidden; position: relative; }
+        #slider { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
+        
         .screen {
-            flex: 0 0 100vw; 
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-sizing: border-box;
-            padding: 20px;
-            text-align: center;
+            flex: 0 0 100vw; height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; box-sizing: border-box;
+            padding: 20px; text-align: center;
         }
 
-        h2 {
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 24px;
-            word-break: keep-all;
-        }
-
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .logo-img {
-            width: 200px;
-            border-radius: 40px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
+        h2 { color: #333; margin-bottom: 30px; font-size: 24px; word-break: keep-all; }
+        
+        .logo-container { display: flex; flex-direction: column; align-items: center; }
+        .logo-img { width: 200px; border-radius: 40px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
         /* --- ✨ 타이핑 효과 스타일 --- */
-        #typing-container {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #555;
-            min-height: 30px; 
-            display: flex;
-            align-items: center;
-        }
-        .cursor {
-            display: inline-block;
-            width: 3px;
-            height: 22px;
-            background-color: #FFCC00;
-            margin-left: 5px;
-            animation: blink 0.8s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
+        #typing-container { margin-top: 20px; font-size: 20px; font-weight: bold; color: #555; min-height: 30px; display: flex; align-items: center; }
+        .cursor { display: inline-block; width: 3px; height: 22px; background-color: #FFCC00; margin-left: 5px; animation: blink 0.8s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .start-btn {
-            margin-top: 40px;
-            font-size: 22px;
-            padding: 15px 40px;
-            border-radius: 30px;
-            background-color: #FFCC00;
-            color: #fff;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 8px 15px rgba(255, 204, 0, 0.4);
-            transition: all 0.2s;
-            animation: bounce 2s infinite; 
+            margin-top: 40px; font-size: 22px; padding: 15px 40px; border-radius: 30px;
+            background-color: #FFCC00; color: #fff; border: none; font-weight: bold; cursor: pointer;
+            box-shadow: 0 8px 15px rgba(255, 204, 0, 0.4); transition: all 0.2s; animation: bounce 2s infinite; 
         }
-        .start-btn:hover, .start-btn:active {
-            transform: scale(0.95);
-            background-color: #e6b800;
-        }
+        .start-btn:hover, .start-btn:active { transform: scale(0.95); background-color: #e6b800; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        .btn-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            max-width: 500px;
-        }
+        .btn-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 500px; }
         .choice-btn {
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            border: 2px solid #FFCC00;
-            border-radius: 15px;
-            padding: 15px 25px;
-            font-size: 18px;
-            font-family: inherit;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);
+            border: 2px solid #FFCC00; border-radius: 15px; padding: 15px 25px;
+            font-size: 18px; font-family: inherit; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.2s; display: flex; align-items: center; gap: 10px;
         }
-        .choice-btn:hover, .choice-btn:active {
-            background-color: #FFCC00;
-            color: #fff;
-        }
+        .choice-btn:hover, .choice-btn:active { background-color: #FFCC00; color: #fff; }
 
         input[type="number"], input[type="text"] {
-            padding: 15px;
-            font-size: 18px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 300px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-family: inherit;
+            padding: 15px; font-size: 18px; border: 2px solid #ddd; border-radius: 10px;
+            width: 80%; max-width: 300px; text-align: center; margin-bottom: 20px; font-family: inherit;
             background-color: rgba(255, 255, 255, 0.9);
         }
-        input:focus {
-            outline: none;
-            border-color: #FFCC00;
-        }
+        input:focus { outline: none; border-color: #FFCC00; }
         .action-btn {
-            background-color: #FFCC00;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(255, 204, 0, 0.3);
-            margin-top: 10px;
+            background-color: #FFCC00; color: #fff; border: none; border-radius: 10px;
+            padding: 15px 40px; font-size: 18px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 6px rgba(255, 204, 0, 0.3); margin-top: 10px;
         }
 
-        #ingredient-msg {
-            font-weight: bold;
-            color: #FF9800;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            line-height: 1.6;
-            text-align: center;
-        }
+        #ingredient-msg { font-weight: bold; color: #FF9800; display: none; flex-direction: column; align-items: center; justify-content: center; line-height: 1.6; text-align: center; }
 
-        /* --- 힙한 영수증 UI 스타일 --- */
-        #result-container {
-            width: 100%;
-            max-width: 400px;
-            max-height: 65vh;
-            overflow-y: auto;
-            margin-bottom: 20px;
-            scrollbar-width: none; 
-        }
+        /* --- 힙한 영수증 UI --- */
+        #result-container { width: 100%; max-width: 400px; max-height: 65vh; overflow-y: auto; margin-bottom: 20px; scrollbar-width: none; }
         #result-container::-webkit-scrollbar { display: none; }
-
         .receipt-paper {
-            background-color: #fdfdfd;
-            padding: 30px 20px;
-            margin: 10px auto;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
-            position: relative;
-            font-family: 'Courier Prime', monospace;
-            text-align: left;
-            color: #222;
-            border: 1px solid #eaeaea;
-            border-top: 4px solid #D32F2F; 
+            background-color: #fdfdfd; padding: 30px 20px; margin: 10px auto; box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+            position: relative; font-family: 'Courier Prime', monospace; text-align: left; color: #222; border: 1px solid #eaeaea; border-top: 4px solid #D32F2F; 
         }
         .receipt-paper::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: linear-gradient(135deg, transparent 50%, #fdfdfd 50%), linear-gradient(-135deg, transparent 50%, #fdfdfd 50%);
-            background-size: 15px 15px;
+            content: ""; position: absolute; bottom: -10px; left: 0; width: 100%; height: 10px;
+            background: linear-gradient(135deg, transparent 50%, #fdfdfd 50%), linear-gradient(-135deg, transparent 50%, #fdfdfd 50%); background-size: 15px 15px;
         }
-
-        .receipt-header {
-            text-align: center;
-            border-bottom: 2px dashed #ccc;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-        .receipt-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0 0 10px 0;
-            letter-spacing: -1px;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
+        .receipt-header { text-align: center; border-bottom: 2px dashed #ccc; padding-bottom: 15px; margin-bottom: 20px; }
+        .receipt-title { font-size: 24px; font-weight: bold; margin: 0 0 10px 0; letter-spacing: -1px; font-family: 'Noto Sans KR', sans-serif; }
         .receipt-info { font-size: 13px; color: #666; margin: 3px 0; }
         .receipt-item { margin-bottom: 20px; }
         .item-row { display: flex; justify-content: space-between; align-items: center; font-size: 17px; font-weight: bold; margin-bottom: 6px; }
         .item-medal { font-size: 20px; margin-right: 5px; }
-        .item-reason {
-            font-size: 13px; color: #555; line-height: 1.5; font-family: 'Noto Sans KR', sans-serif; 
-            padding-left: 5px; border-left: 2px solid #eee;
-        }
+        .item-reason { font-size: 13px; color: #555; line-height: 1.5; font-family: 'Noto Sans KR', sans-serif; padding-left: 5px; border-left: 2px solid #eee; }
         .receipt-footer { border-top: 2px dashed #ccc; padding-top: 20px; text-align: center; }
         .total-msg { font-size: 18px; font-weight: bold; font-family: 'Noto Sans KR', sans-serif; color: #D32F2F; margin-bottom: 15px; }
         .barcode { font-size: 35px; font-weight: normal; letter-spacing: 2px; color: #111; opacity: 0.8; margin-top: 5px; }
 
         /* --- ✨ 귀염뽀짝 회색 냄비 애니메이션 --- */
-        .pot-container { 
-            position: relative; 
-            width: 140px; 
-            height: 120px; 
-            margin-bottom: 30px; 
-            display: flex;
-            justify-content: center;
-        }
-        .pot-body { 
-            position: absolute; 
-            bottom: 0; 
-            width: 100px; 
-            height: 70px; 
-            background: #9E9E9E; 
-            border-radius: 20px 20px 40px 40px; 
-            box-shadow: inset -10px -10px 0 rgba(0,0,0,0.1); 
-            z-index: 2;
-        }
-        .pot-handle {
-            position: absolute;
-            bottom: 30px;
-            width: 130px;
-            height: 20px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 1;
-        }
-        .pot-handle::before, .pot-handle::after {
-            content: '';
-            width: 25px;
-            height: 20px;
-            background: #757575; 
-            border-radius: 10px;
-        }
-        .pot-face {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 3;
-        }
-        .pot-face::before, .pot-face::after {
-            content: '';
-            width: 7px;
-            height: 7px;
-            background: #444; 
-            border-radius: 50%;
-        }
-        .pot-mouth {
-            position: absolute;
-            bottom: 22px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 5px;
-            border-bottom: 3px solid #444;
-            border-radius: 0 0 10px 10px;
-            z-index: 3;
-        }
-        .pot-blush {
-            position: absolute;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 56px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 3;
-        }
-        .pot-blush::before, .pot-blush::after {
-            content: '';
-            width: 12px;
-            height: 6px;
-            background: rgba(255, 120, 120, 0.5);
-            border-radius: 50%;
-        }
-        .pot-lid { 
-            position: absolute; 
-            bottom: 63px; 
-            width: 106px; 
-            height: 25px; 
-            background: #E0E0E0; 
-            border-radius: 30px 30px 0 0; 
-            animation: lid-dance 0.4s infinite alternate; 
-            z-index: 4;
-            box-shadow: inset -5px -5px 0 rgba(0,0,0,0.05);
-        }
-        .pot-lid::before {
-            content: '';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 25px;
-            height: 12px;
-            background: #757575; 
-            border-radius: 10px 10px 0 0;
-        }
+        .pot-container { position: relative; width: 140px; height: 120px; margin-bottom: 30px; display: flex; justify-content: center; }
+        .pot-body { position: absolute; bottom: 0; width: 100px; height: 70px; background: #9E9E9E; border-radius: 20px 20px 40px 40px; box-shadow: inset -10px -10px 0 rgba(0,0,0,0.1); z-index: 2; }
+        .pot-handle { position: absolute; bottom: 30px; width: 130px; height: 20px; display: flex; justify-content: space-between; z-index: 1; }
+        .pot-handle::before, .pot-handle::after { content: ''; width: 25px; height: 20px; background: #757575; border-radius: 10px; }
+        .pot-face { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 40px; display: flex; justify-content: space-between; z-index: 3; }
+        .pot-face::before, .pot-face::after { content: ''; width: 7px; height: 7px; background: #444; border-radius: 50%; }
+        .pot-mouth { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); width: 10px; height: 5px; border-bottom: 3px solid #444; border-radius: 0 0 10px 10px; z-index: 3; }
+        .pot-blush { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); width: 56px; display: flex; justify-content: space-between; z-index: 3; }
+        .pot-blush::before, .pot-blush::after { content: ''; width: 12px; height: 6px; background: rgba(255, 120, 120, 0.5); border-radius: 50%; }
+        .pot-lid { position: absolute; bottom: 63px; width: 106px; height: 25px; background: #E0E0E0; border-radius: 30px 30px 0 0; animation: lid-dance 0.4s infinite alternate; z-index: 4; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.05); }
+        .pot-lid::before { content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 25px; height: 12px; background: #757575; border-radius: 10px 10px 0 0; }
         @keyframes lid-dance { to { transform: translateY(-6px) rotate(4deg); } }
-        .steam { 
-            position: absolute; 
-            bottom: 70px; 
-            width: 20px; 
-            height: 20px; 
-            background: rgba(255, 255, 255, 0.8); 
-            border-radius: 50%; 
-            animation: steam-rise 1.5s infinite; 
-            opacity: 0; 
-            z-index: 0;
-        }
-        .s1 { left: 40px; animation-delay: 0.2s; } 
-        .s2 { left: 60px; animation-delay: 0.8s; width: 25px; height: 25px; } 
-        .s3 { left: 80px; animation-delay: 0.4s; }
-        @keyframes steam-rise { 
-            0% { transform: translateY(0) scale(0.5); opacity: 0; } 
-            50% { opacity: 1; } 
-            100% { transform: translateY(-50px) scale(1.5); opacity: 0; } 
-        }
+        .steam { position: absolute; bottom: 70px; width: 20px; height: 20px; background: rgba(255, 255, 255, 0.8); border-radius: 50%; animation: steam-rise 1.5s infinite; opacity: 0; z-index: 0; }
+        .s1 { left: 40px; animation-delay: 0.2s; } .s2 { left: 60px; animation-delay: 0.8s; width: 25px; height: 25px; } .s3 { left: 80px; animation-delay: 0.4s; }
+        @keyframes steam-rise { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-50px) scale(1.5); opacity: 0; } }
         #loading-text { font-size: 26px; font-weight: bold; color: #FF9800; margin-top: 10px; }
 
         /* --- ✨ 은은한 음식 이모지 애니메이션 --- */
-        #emoji-background {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; 
-        }
-        .floating-emoji {
-            position: absolute; bottom: -50px; font-size: 30px; opacity: 0; animation: emoji-float 10s infinite ease-in-out;
-        }
+        #emoji-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
+        .floating-emoji { position: absolute; bottom: -50px; font-size: 30px; opacity: 0; animation: emoji-float 10s infinite ease-in-out; }
         .emoji-1 { left: 10%; animation-duration: 8s; opacity: 0.1; }
         .emoji-2 { left: 30%; animation-duration: 12s; opacity: 0.05; animation-delay: 2s; }
         .emoji-3 { left: 50%; animation-duration: 10s; opacity: 0.15; animation-delay: 4s; }
@@ -382,13 +127,7 @@
         .emoji-6 { left: 20%; animation-duration: 9s; opacity: 0.06; animation-delay: 3s; }
         .emoji-7 { left: 60%; animation-duration: 13s; opacity: 0.14; animation-delay: 6s; }
         .emoji-8 { left: 80%; animation-duration: 10s; opacity: 0.09; animation-delay: 7s; }
-
-        @keyframes emoji-float {
-            0% { transform: translateY(0); opacity: 0; }
-            10% { opacity: 1; } 
-            90% { opacity: 1; } 
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
-        }
+        @keyframes emoji-float { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -504,7 +243,6 @@
             if (inputId) { const val = document.getElementById(inputId).value; if (!val) return alert("값을 입력해주세요!"); state[key] = val; }
             else if (directValue) { state[key] = directValue; }
 
-            // 🔥 장르에 따른 스타일 버튼 동적 변경 로직
             if (key === 'cuisine') {
                 const styleGrid = document.getElementById('style-btn-grid');
                 if (state.cuisine === '디저트') {
@@ -518,7 +256,6 @@
                 }
             }
 
-            // 🔥 디저트 맛 동적 변경 로직
             if (key === 'style') {
                 const flavorGrid = document.getElementById('flavor-btn-grid');
                 if (state.cuisine === '디저트') {
@@ -555,22 +292,19 @@
             fetchRecommendations();
         }
 
+        // 🔥 여기가 완벽하게 보완된 AI 통신 + 파싱 로직입니다!
         async function fetchRecommendations() {
-            // 🔥 복원된 튼튼한 프롬프트! (절대 에러나지 않도록 수정)
             const prompt = `
 당신은 트렌디하고 창의적인 미식 추천 전문가입니다. 
 상황: 인원(${state.people}명), 장르(${state.cuisine}), 스타일(${state.style}), 맛(${state.flavor}), 날씨(${state.weather}), 나이대(${state.age}), 원하는 식재료(${state.ingredient}), 알레르기/제외식재료(${state.allergy}).
 
 규칙:
 1. 알레르기 식재료는 무조건 배제하세요.
-2. 입력된 인원수(${state.people}명)를 추천 시 가장 1순위로 고려하세요! 
-   - 1명이면 혼자 먹기 편한 1인분 식사나 1인 세트
-   - 2명이면 커플/데이트용 메뉴나 2인 세트
-   - 3명 이상이면 다 같이 나눠 먹을 수 있는 푸짐한 전골, 플래터, 파티 사이즈 메뉴 등을 추천하세요.
-3. 추천 이유(reason)를 작성할 때, 반드시 "${state.people}명이서 먹기 좋은~", "혼자서 즐기기 좋은~" 처럼 인원수를 구체적으로 언급하며 설명하세요.
-4. 장르(${state.cuisine})와 스타일(${state.style})에 완벽하게 들어맞는 메뉴 3가지를 추천하세요.
-5. 각 음식 이름(name)의 맨 끝에, 그 음식과 가장 잘 어울리는 이모지를 하나씩 반드시 포함해서 출력하세요. (예: "밀푀유나베 🍲")
-6. 출력 형식은 반드시 아래의 JSON 배열 포맷만 출력하세요. 어떤 부가 설명도 마크다운도 허용하지 않습니다.
+2. 입력된 인원수(${state.people}명)를 최우선으로 고려하세요 (1명=혼밥, 2명=커플, 3명이상=다같이 먹는 메뉴).
+3. 추천 이유(reason)에 "${state.people}명이서 먹기 좋은~" 처럼 인원수를 구체적으로 언급하세요.
+4. 장르와 스타일에 맞는 메뉴 3가지를 추천하세요.
+5. 음식 이름(name) 끝에 어울리는 이모지를 하나씩 포함하세요.
+6. 어떤 부가 설명도 쓰지 마세요. 인사말도 하지 마세요. 오직 아래 형식의 순수 JSON 배열만 출력하세요.
 
 [
   { "name": "음식명 이모지", "reason": "이유 설명" },
@@ -579,18 +313,56 @@
 ]`;
 
             try {
-                const response = await fetch('/api/recommend', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt }) });
-                if (!response.ok) throw new Error("서버 통신 에러");
-                const menuData = await response.json(); 
+                const response = await fetch('/api/recommend', { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify({ prompt }) 
+                });
+
+                if (!response.ok) {
+                    if (response.status === 504) throw new Error("Vercel 서버 응답 시간 초과 (AI가 너무 오래 생각했습니다).");
+                    throw new Error(`서버 통신 에러 (${response.status})`);
+                }
+
+                // JSON 텍스트 원본을 가져옵니다.
+                const rawText = await response.text();
+                let menuData;
+                
+                try {
+                    // 1. 예쁘게 포맷된 JSON인지 먼저 확인
+                    menuData = JSON.parse(rawText);
+                } catch (e) {
+                    // 2. AI가 마크다운(```json ... ```)을 붙여서 보냈다면, 정규식으로 대괄호 [ ] 안의 배열만 쏙 뽑아냅니다!
+                    const match = rawText.match(/\[[\s\S]*\]/);
+                    if (match) {
+                        menuData = JSON.parse(match[0]);
+                    } else {
+                        throw new Error("AI가 올바른 JSON 데이터를 보내지 않았습니다.");
+                    }
+                }
+
+                // 백엔드 구조에 따라 reply 안에 감싸져 올 경우 방어 로직
+                if (menuData.reply) {
+                    if (typeof menuData.reply === 'string') {
+                        const match = menuData.reply.match(/\[[\s\S]*\]/);
+                        menuData = JSON.parse(match[0]);
+                    } else {
+                        menuData = menuData.reply;
+                    }
+                }
+
                 renderResults(menuData);
+
             } catch (error) { 
                 console.error(error);
-                document.getElementById('result-container').innerHTML = `
-                    <div style="color: #D32F2F; font-weight: bold; background: #ffebee; padding: 20px; border-radius: 10px; text-align: center;">
-                        <h3 style="margin-top:0;">🚨 에러 발생!</h3>
-                        <p style="word-break: keep-all; line-height: 1.5;">AI가 응답을 생성하는 중 문제가 생겼습니다.</p>
+                const container = document.getElementById('result-container');
+                // 화면에 정확히 무슨 에러인지 빨간색으로 자세히 보여주도록 수정!
+                container.innerHTML = `
+                    <div style="color: #D32F2F; background: #ffebee; padding: 20px; border-radius: 10px; text-align: center; border: 2px solid #ffcdd2;">
+                        <h3 style="margin-top:0; font-size: 22px;">🚨 통신 에러!</h3>
+                        <p style="word-break: keep-all; line-height: 1.5; font-weight:bold; margin-bottom: 0;">${error.message}</p>
                     </div>`; 
-                setTimeout(() => { bgm.pause(); nextScreen(); }, 1500); 
+                setTimeout(() => { bgm.pause(); nextScreen(); }, 2000); 
             }
         }
 
